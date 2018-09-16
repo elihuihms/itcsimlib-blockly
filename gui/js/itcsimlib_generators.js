@@ -16,7 +16,7 @@ Blockly.Python.addIndents = function(code, indent_char, indent_count){
 Blockly.Python.addReservedWords("itcsimlib,model,simulator,c_index");
 
 Blockly.Python.finish = function(code){
-	var dirname = Code.__dirname;
+	var dirname = Code.dirname;
 
 	return `import sys
 sys.path.append("${dirname}")

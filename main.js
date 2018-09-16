@@ -56,14 +56,14 @@ function runScript(code){
 
 			env.python.stderr.on("data", (data) => {
 				console.log("stderr: ",data.toString("utf8"));
-				env.client.send("action-senderror", "Script syntax error: "+data.toString("utf8"));
+				env.client.send("action-senderror", data.toString("utf8"));
 				fs.appendFileSync(path_stderr, data);
 			})
 
 			env.python.on("close", (code) => {
 				console.log(code);
 				env.client.send("action-sendstatus", "done");
-				python = null;
+				env.python = null;
 			});
 		}
 	});
