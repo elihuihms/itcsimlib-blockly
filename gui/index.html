@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title>Blockly itcsimlib</title>
-  <link href="css/gui.css" rel="stylesheet">
-  <script src="js/blockly_compressed.js"></script>
-  <script src="js/blocks_compressed.js"></script>
-  <script src="js/python_compressed.js"></script>
-  <script src="js/en.js"></script>
-  <script src="js/msg.js"></script>
+  
+  <script src="../blockly/blockly_compressed.js"></script>
+  <script src="../blockly/blocks_compressed.js"></script>
+  <script src="../blockly/python_compressed.js"></script>
+  <script src="../blockly/msg/js/en.js"></script>
+  
   <script src="js/itcsimlib_blocks.js"></script>
   <script src="js/itcsimlib_generators.js"></script>
   <script src="js/gui.js"></script>
+
+  <link href="css/gui.css" rel="stylesheet">
 </head>
 <body>
   <div id="overlay"></div>
@@ -29,10 +31,10 @@
             <td class="tabmin">&nbsp;</td>
             <td class="tabmax">
               <button id="trashButton" class="notext" title="...">
-                <img src='media/1x1.gif' class="trash icon21">
+                <img src='../blockly/media/1x1.gif' class="trash icon21">
               </button>
               <button id="runButton" class="notext primary" title="...">
-                <img src='media/1x1.gif' class="run icon21">
+                <img src='../blockly/media/1x1.gif' class="run icon21">
               </button>
             </td>
           </tr>

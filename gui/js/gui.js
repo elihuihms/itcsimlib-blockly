@@ -37,10 +37,6 @@ Code.initializeIPC = function() {
    * set up communication with main process thread, return true on success, false otherwise
    */
 
-   if( ipcRenderer === null ){
-    return false;
-   }
-
   ipcRenderer.send("action-init", true);
 
   ipcRenderer.on("action-sendcwd", (event, arg) => {
@@ -282,11 +278,11 @@ Code.init = function(){
   // into `Blockly.Msg`.
   // TODO: Clean up the message files so this is done explicitly instead of
   // through this for-loop.
-  for (var messageKey in MSG) {
+  /*for (var messageKey in MSG) {
     if (messageKey.indexOf('cat') == 0) {
       Blockly.Msg[messageKey.toUpperCase()] = MSG[messageKey];
     }
-  }
+  }*/
 
   // Construct the toolbox XML, replacing translated variable names.
   var toolboxText = document.getElementById('toolbox').outerHTML;
@@ -298,7 +294,7 @@ Code.init = function(){
            length: 3,
            colour: '#ccc',
            snap: true},
-       media: 'media/',
+       media: '../blockly/media/',
        rtl: rtl,
        toolbox: toolboxXml,
        zoom:
@@ -340,8 +336,6 @@ Code.init = function(){
   onresize();
   Blockly.svgResize(Code.workspace);
 
-  // Lazy-load the syntax-highlighting.
-  window.setTimeout(Code.importPrettify, 1);
 
   /*
    * initialize parent thread connection

@@ -143,7 +143,7 @@ button {
 .icon21 {
   height: 21px;
   width: 21px;
-  background-image: url(../media/icons.png);
+  background-image: url(../img/icons.png);
 }
 .trash {
   background-position: 0px 0px;
@@ -171,7 +171,7 @@ button {
   bottom: 0;
   background-color: rgba(255,255,255,0.5); /* white background with opacity */
   cursor: pointer; /* Add a pointer on hover */
-  background-image: url(../media/spinner.gif);
+  background-image: url(../img/spinner.gif);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

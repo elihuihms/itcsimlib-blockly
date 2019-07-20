@@ -21,7 +21,7 @@ env.python = null; // script process
 function createWindow(){
 	window = new BrowserWindow({width: 800, height: 600});
 	window.loadFile("gui/index.html");
-	//window.openDevTools();
+	window.openDevTools();
 }
 
 function runScript(code){

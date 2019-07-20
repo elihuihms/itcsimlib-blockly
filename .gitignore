@@ -60,9 +60,12 @@ typings/
 # next.js build output
 .next
 
-# itcsimlib redist
+# itcsimlib, blockly, closure redist
 itcsimlib/
+blockly/
+closure-library/
 
 # mac garbage
 *.DS_Store
+
 
