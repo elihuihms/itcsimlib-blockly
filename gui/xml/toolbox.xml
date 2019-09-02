@@ -356,14 +356,7 @@
   <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
   <category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
   <sep></sep>
-  <category name="Example Ising" colour="#6d5ba5">
-    <block type="setup_ising_model">
-      <field name="NAME">name</field>
-      <field name="NSITES">1</field>
-      <field name="CIRCULAR">TRUE</field>
-    </block>
-  </category>
-  <category name="Block Library" colour="#a55b5b">
+  <category name="All Blocks" colour="#80a55b">
     <block type="simulator_done"></block>
     <block type="add_ising_parameter">
       <field name="TYPE">dG</field>
@@ -408,8 +401,134 @@
       <field name="NSITES">1</field>
       <field name="CIRCULAR">TRUE</field>
     </block>
+    <block type="get_partition_function">
+      <field name="substitute_Ks">TRUE</field>
+      <field name="full_simplify">TRUE</field>
+    </block>
+    <block type="draw_lattices">
+      <field name="size">1</field>
+      <field name="dG_tolerance">6</field>
+      <value name="file">
+        <shadow type="text">
+          <field name="TEXT">lattices.pdf</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="read_nitpic_exp">
+      <field name="LIGAND_NAME">Ligand</field>
+      <field name="LATTICE_NAME">Lattice</field>
+      <field name="recalc_concs">TRUE</field>
+    </block>
   </category>
-  <category name="Testing" colour="#5ba5a5">
+  <category name="Experiments" colour="#a55b5b">
+    <block type="read_nitpic_exp">
+      <field name="LIGAND_NAME">Ligand</field>
+      <field name="LATTICE_NAME">Lattice</field>
+      <field name="recalc_concs">TRUE</field>
+    </block>
+    <block type="synthetic_experiment">
+      <field name="TITLE">title</field>
+      <field name="LIGAND_NAME">Ligand</field>
+      <field name="LIGAND_CONC">1</field>
+      <field name="LATTICE_NAME">Lattice</field>
+      <field name="LATTICE_CONC">0.01</field>
+    </block>
+  </category>
+  <category name="Models" colour="#5b6da5">
+    <block type="independent_modes_model">
+      <field name="MODES">2</field>
+      <field name="LIGAND_NAME">Ligand</field>
+      <field name="LATTICE_NAME">Lattice</field>
+    </block>
+    <block type="setup_ising_model">
+      <field name="NAME">name</field>
+      <field name="NSITES">6</field>
+      <field name="CIRCULAR">TRUE</field>
+      <statement name="PARAMETERS">
+        <block type="add_ising_parameter">
+          <field name="TYPE">dG</field>
+          <field name="NAME">A</field>
+          <next>
+            <block type="add_ising_parameter">
+              <field name="TYPE">dH</field>
+              <field name="NAME">B</field>
+            </block>
+          </next>
+        </block>
+      </statement>
+      <statement name="CONFIGURATION">
+        <block type="controls_forEach">
+          <field name="VAR" id="09QMBTOhrA!.Bf].ekO]" variabletype="">i</field>
+          <value name="LIST">
+            <block type="configuration_sites">
+              <field name="TYPE">ALL</field>
+            </block>
+          </value>
+          <statement name="DO">
+            <block type="controls_if">
+              <value name="IF0">
+                <block type="site_is_occupied">
+                  <field name="OCCUPIED">True</field>
+                  <value name="SITE">
+                    <block type="variables_get">
+                      <field name="VAR" id="09QMBTOhrA!.Bf].ekO]" variabletype="">i</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <statement name="DO0">
+                <block type="add_dg_model_value">
+                  <value name="DG">
+                    <block type="text">
+                      <field name="TEXT">A</field>
+                    </block>
+                  </value>
+                  <value name="dH">
+                    <block type="text">
+                      <field name="TEXT">B</field>
+                    </block>
+                  </value>
+                  <value name="DCP">
+                    <shadow type="math_number">
+                      <field name="NUM">0</field>
+                    </shadow>
+                  </value>
+                  <next>
+                    <block type="add_dh_model_value">
+                      <value name="dH">
+                        <block type="text">
+                          <field name="TEXT">B</field>
+                        </block>
+                      </value>
+                      <value name="DCP">
+                        <shadow type="math_number">
+                          <field name="NUM">0</field>
+                        </shadow>
+                      </value>
+                    </block>
+                  </next>
+                </block>
+              </statement>
+            </block>
+          </statement>
+        </block>
+      </statement>
+    </block>
+  </category>
+  <category name="Output" colour="#5ba5a5">
+    <block type="plot_experiment_data">
+      <field name="EXTENSION">png</field>
+    </block>
+    <block type="get_partition_function">
+      <field name="substitute_Ks">TRUE</field>
+      <field name="full_simplify">TRUE</field>
+    </block>
+    <block type="draw_lattices">
+      <field name="size">1</field>
+      <field name="dG_tolerance">6</field>
+    </block>
+  </category>
+  <category name="Examples" colour="#a5935b">
     <block type="make_simulator">
       <field name="T0">273.15</field>
       <field name="UNITS">kcal</field>
@@ -479,6 +598,74 @@
                               <field name="NUM">0</field>
                             </block>
                           </value>
+                          <next>
+                            <block type="controls_if">
+                              <value name="IF0">
+                                <block type="logic_operation">
+                                  <field name="OP">OR</field>
+                                  <value name="A">
+                                    <block type="site_is_occupied">
+                                      <field name="OCCUPIED">True</field>
+                                      <value name="SITE">
+                                        <block type="math_arithmetic">
+                                          <field name="OP">ADD</field>
+                                          <value name="A">
+                                            <block type="variables_get">
+                                              <field name="VAR" id="gfy9Pb.]s^~^mkMT_Pmg" variabletype="">i</field>
+                                            </block>
+                                          </value>
+                                          <value name="B">
+                                            <block type="math_number">
+                                              <field name="NUM">1</field>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </value>
+                                    </block>
+                                  </value>
+                                  <value name="B">
+                                    <block type="site_is_occupied">
+                                      <field name="OCCUPIED">True</field>
+                                      <value name="SITE">
+                                        <block type="math_arithmetic">
+                                          <field name="OP">MINUS</field>
+                                          <value name="A">
+                                            <block type="variables_get">
+                                              <field name="VAR" id="gfy9Pb.]s^~^mkMT_Pmg" variabletype="">i</field>
+                                            </block>
+                                          </value>
+                                          <value name="B">
+                                            <block type="math_number">
+                                              <field name="NUM">1</field>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </value>
+                                    </block>
+                                  </value>
+                                </block>
+                              </value>
+                              <statement name="DO0">
+                                <block type="add_dg_model_value">
+                                  <value name="DG">
+                                    <block type="text">
+                                      <field name="TEXT">foo</field>
+                                    </block>
+                                  </value>
+                                  <value name="dH">
+                                    <block type="text">
+                                      <field name="TEXT">bar</field>
+                                    </block>
+                                  </value>
+                                  <value name="DCP">
+                                    <block type="math_number">
+                                      <field name="NUM">0</field>
+                                    </block>
+                                  </value>
+                                </block>
+                              </statement>
+                            </block>
+                          </next>
                         </block>
                       </next>
                     </block>
@@ -495,9 +682,9 @@
             <block type="synthetic_experiment">
               <field name="TITLE">title</field>
               <field name="LIGAND_NAME">Ligand</field>
-              <field name="LIGAND_CONC">1</field>
+              <field name="LIGAND_CONC">0.1</field>
               <field name="LATTICE_NAME">Lattice</field>
-              <field name="LATTICE_CONC">0.01</field>
+              <field name="LATTICE_CONC">0.001</field>
               <value name="TEMPERATURE">
                 <block type="math_number">
                   <field name="NUM">298.15</field>
@@ -554,25 +741,47 @@
                     </block>
                   </value>
                   <next>
-                    <block type="run_simulator">
+                    <block type="get_partition_function">
+                      <field name="substitute_Ks">TRUE</field>
+                      <field name="full_simplify">TRUE</field>
+                      <value name="file">
+                        <block type="text">
+                          <field name="TEXT">partition</field>
+                        </block>
+                      </value>
                       <next>
-                        <block type="controls_forEach">
-                          <field name="VAR" id="ON9Y:(Vf/zglv/oo$F]Y" variabletype="">j</field>
-                          <value name="LIST">
-                            <block type="simulator_experiments"></block>
-                          </value>
-                          <statement name="DO">
-                            <block type="plot_experiment_data">
-                              <field name="EXTENSION">png</field>
-                              <value name="NAME">
-                                <block type="variables_get">
-                                  <field name="VAR" id="ON9Y:(Vf/zglv/oo$F]Y" variabletype="">j</field>
-                                </block>
-                              </value>
+                        <block type="draw_lattices">
+                          <field name="size">1</field>
+                          <field name="dG_tolerance">6</field>
+                          <value name="file">
+                            <block type="text">
+                              <field name="TEXT">lattices</field>
                             </block>
-                          </statement>
+                          </value>
                           <next>
-                            <block type="simulator_done"></block>
+                            <block type="run_simulator">
+                              <next>
+                                <block type="controls_forEach">
+                                  <field name="VAR" id="ON9Y:(Vf/zglv/oo$F]Y" variabletype="">j</field>
+                                  <value name="LIST">
+                                    <block type="simulator_experiments"></block>
+                                  </value>
+                                  <statement name="DO">
+                                    <block type="plot_experiment_data">
+                                      <field name="EXTENSION">png</field>
+                                      <value name="NAME">
+                                        <block type="variables_get">
+                                          <field name="VAR" id="ON9Y:(Vf/zglv/oo$F]Y" variabletype="">j</field>
+                                        </block>
+                                      </value>
+                                    </block>
+                                  </statement>
+                                  <next>
+                                    <block type="simulator_done"></block>
+                                  </next>
+                                </block>
+                              </next>
+                            </block>
                           </next>
                         </block>
                       </next>

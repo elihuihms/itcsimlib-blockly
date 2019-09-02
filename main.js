@@ -64,6 +64,7 @@ function runScript(code){
 				console.log(code);
 				env.client.send("action-sendstatus", "done");
 				env.python = null;
+				console.log("FINISHED EXECUTION");
 			});
 		}
 	});

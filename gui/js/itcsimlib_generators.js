@@ -13,7 +13,7 @@ Blockly.Python.addIndents = function(code, indent_char, indent_count){
 	return a.join("\n");
 }
 
-Blockly.Python.addReservedWords("itcsimlib,model,simulator,c_index");
+Blockly.Python.addReservedWords("itcsimlib,model,simulator,c_index,_tmp");
 
 Blockly.Python.finish = function(code){
 	var dirname = Code.dirname;
@@ -26,6 +26,8 @@ from itcsimlib.thermo import *
 from itcsimlib.utilities import *
 from itcsimlib import model_ising, model_independent
 from itcsimlib import itc_experiment
+
+from lib.blockly import blockly_add_nitpic
 
 true = True
 false = False
@@ -85,6 +87,28 @@ Blockly.Python['synthetic_experiment'] = function(block) {
 	
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['read_nitpic_exp'] = function(block) {
+  var text_ligand_name = block.getFieldValue('LIGAND_NAME');
+  var text_lattice_name = block.getFieldValue('LATTICE_NAME');
+  var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+  var checkbox_recalc_concs = block.getFieldValue('recalc_concs') == 'TRUE';
+  
+  var code = `blockly_add_nitpic(read_nitpic_exp(${value_file}, recalc_concs=${checkbox_recalc_concs}), ligand="${text_ligand_name}", lattice="${text_lattice_name}")`;
+
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['change_component_name'] = function(block) {
+  var text_old_name = block.getFieldValue('old_name');
+  var text_new_name = block.getFieldValue('new_name');
+  var value_experiment = Blockly.Python.valueToCode(block, 'experiment', Blockly.Python.ORDER_ATOMIC);
+  
+  var code = `${value_experiment}.change_component_name(${text_old_name}, ${text_new_name});`;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['simulator_experiments'] = function(block) {
@@ -216,6 +240,44 @@ model = BlocklyIsingModel(nsites = ${number_nsites}, circular = ${checkbox_circu
 		return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['get_partition_function'] = function(block) {
+  var checkbox_substitute_ks = block.getFieldValue('substitute_Ks') == 'TRUE';
+  var checkbox_full_simplify = block.getFieldValue('full_simplify') == 'TRUE';
+  var checkbox_as_latex = block.getFieldValue('as_latex') == 'TRUE';
+  var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	
+	var code = `
+
+if not issubclass(model.__class__, model_ising.Ising):
+	raise Exception("Cannot calculate partition function from a simulator model that is not Ising-based.")
+
+if (${checkbox_as_latex}):
+	from sympy.printing.latex import latex
+	_tmp = open(${value_file} + ".tex", "w+")
+	_tmp.write( latex(simulator.model.get_partition_function(substitute_Ks=${checkbox_substitute_ks}, full_simplify=${checkbox_full_simplify})) )
+else:
+	_tmp = open(${value_file} + ".txt", "w+")
+	_tmp.write( str(simulator.model.get_partition_function(substitute_Ks=${checkbox_substitute_ks}, full_simplify=${checkbox_full_simplify})) )
+
+_tmp.close()
+`;
+	return code;
+};
+
+Blockly.Python['draw_lattices'] = function(block) {
+  var number_size = block.getFieldValue('size');
+  var number_dg_tolerance = block.getFieldValue('dG_tolerance');
+  var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+
+  var code = `
+if not issubclass(model.__class__, model_ising.Ising):
+	raise Exception("Cannot generate lattices figures from a simulator model that is not Ising-based.")
+
+simulator.model.draw_lattices(${value_file}, size=${number_size}, dG_tolerance=${number_dg_tolerance})
+`;
+  return code;
+};
+
 Blockly.Python['site_is_occupied'] = function(block) {
 		var value_site = Blockly.Python.valueToCode(block, 'SITE', Blockly.Python.ORDER_NONE);
 		var dropdown_occupied = block.getFieldValue('OCCUPIED');
@@ -294,6 +356,7 @@ self.enthalpies[c_index] += dH_vant_Hoff(
 	self.blockly_param(${value_dh}),
 	self.blockly_param(${value_dcp}),
 	T, T0)
+
 `;
 		return code;
 };

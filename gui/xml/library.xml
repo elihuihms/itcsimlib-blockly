@@ -262,8 +262,8 @@
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="gD|AA6:;_E;Ce{9,[O#:">
-        <mutation colour="#995ba5"></mutation>
-        <field name="HUE">290</field>
+        <mutation colour="#a65b5b"></mutation>
+        <field name="HUE">0</field>
       </block>
     </value>
   </block><block type="factory_base" id="tT!](]7@j_eHGWRT*!@v" deletable="false" movable="false" x="10" y="10">
@@ -406,7 +406,7 @@
         <field name="ALIGN">LEFT</field>
         <statement name="FIELDS">
           <block type="field_static" id="2MtP+,IO0vh5Jf:42eZQ">
-            <field name="TEXT">Add to simulator</field>
+            <field name="TEXT">Add experiment to simulator</field>
           </block>
         </statement>
         <value name="TYPE">
@@ -441,7 +441,7 @@
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="Y%#c*l].OORWzyPfx4qC">
-        <mutation colour="#5ba55b"></mutation>
+        <mutation colour="#5ba65b"></mutation>
         <field name="HUE">120</field>
       </block>
     </value>
@@ -1181,6 +1181,333 @@
       <block type="colour_hue" id="k(whnN8D-@5g3soNr%z?">
         <mutation colour="#5ba55b"></mutation>
         <field name="HUE">120</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="MDK!)*0nAdMD$8I_|m6Y" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">get_partition_function</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="3@fn$[:H1BMJT(4sj-k4">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="Wr/+R8^en[?bN+mw*1b@">
+            <field name="TEXT">Print partition function</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id="N(_}`~[=G-uEV,k$Q.]|">
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="1fIZa)J6:C),c6{MYZLk">
+                <field name="TEXT">Convert dGs to K</field>
+                <next>
+                  <block type="field_checkbox" id=",odCd1EP+iFzqkIf]zHT">
+                    <field name="CHECKED">TRUE</field>
+                    <field name="FIELDNAME">substitute_Ks</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="input_dummy" id="VE0qd_(nWhZ=ynE.G/)]">
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id=",V;xT=#A@O)BvFAu;t5q">
+                    <field name="TEXT">Aggressively simplify expression</field>
+                    <next>
+                      <block type="field_checkbox" id="Z1z+p,/u]89n:*$6T`La">
+                        <field name="CHECKED">TRUE</field>
+                        <field name="FIELDNAME">full_simplify</field>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="input_value" id="segn$*=QW;*7]r)5[37m">
+                    <field name="INPUTNAME">file</field>
+                    <field name="ALIGN">RIGHT</field>
+                    <statement name="FIELDS">
+                      <block type="field_static" id="kbNtF]m_|lEoRrT|Z+Bp">
+                        <field name="TEXT">File name:</field>
+                      </block>
+                    </statement>
+                    <value name="TYPE">
+                      <shadow type="type_null" id="ySQFRSF[78Y;7!c+_co*"></shadow>
+                      <block type="type_string" id="K3#1yY@S@@|F;H1jP,_!"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="+|,23g:G1/@!o5dBOFhT" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="})/%GPA$Bqb*-{anYn)^" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="Q{nB,yg@qUn]lzp|u{)$"></shadow>
+      <block type="type_other" id="Pzcb4}]f-gMUpw:._FZt">
+        <field name="TYPE">Simulator</field>
+      </block>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="CFZ%jzQ%9t)[y%v{B%Ru"></shadow>
+      <block type="type_other" id="#d?]iPRu8Ok^rB%|T*W%">
+        <field name="TYPE">Simulator</field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="nv:dfuZgJg/9~(8dyVF|">
+        <mutation colour="#995ba6"></mutation>
+        <field name="HUE">290</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="}X6s?kA7]6+@kbr{316l" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">draw_lattices</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="/{WMZW)}[5M,=hG,h;j!">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="J#uiJ$cky7r.Z$Btt)kK">
+            <field name="TEXT">Draw lattices</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id="N(_}`~[=G-uEV,k$Q.]|">
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="1fIZa)J6:C),c6{MYZLk">
+                <field name="TEXT">Scale:</field>
+                <next>
+                  <block type="field_number" id=":P%0f1[/rSHY0on$I-a.">
+                    <field name="VALUE">1</field>
+                    <field name="FIELDNAME">size</field>
+                    <field name="MIN">0</field>
+                    <field name="MAX">Infinity</field>
+                    <field name="PRECISION">1</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="input_dummy" id=";EdW:uhI,0XF!5++xQze">
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="y~jnv|*[HG=1b99O@*Py">
+                    <field name="TEXT">dG tolerance:</field>
+                    <next>
+                      <block type="field_number" id="aqL{osjPJ7V8PVu1Tj~%">
+                        <field name="VALUE">6</field>
+                        <field name="FIELDNAME">dG_tolerance</field>
+                        <field name="MIN">1</field>
+                        <field name="MAX">Infinity</field>
+                        <field name="PRECISION">0</field>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="input_value" id="segn$*=QW;*7]r)5[37m">
+                    <field name="INPUTNAME">file</field>
+                    <field name="ALIGN">RIGHT</field>
+                    <statement name="FIELDS">
+                      <block type="field_static" id="kbNtF]m_|lEoRrT|Z+Bp">
+                        <field name="TEXT">File name:</field>
+                      </block>
+                    </statement>
+                    <value name="TYPE">
+                      <shadow type="type_null" id="ySQFRSF[78Y;7!c+_co*"></shadow>
+                      <block type="type_string" id="K3#1yY@S@@|F;H1jP,_!"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="bKJJ@gZy*rM!)5~GEahY" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="8VG-5Ni:gFp(02pP8^vn" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="vpkle0Ao89Fk}_LA!m=M"></shadow>
+      <block type="type_other" id="jw?sd/E8Y@?uSn^z)BHI">
+        <field name="TYPE">Simulator</field>
+      </block>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="hgws8s!psE:?dl_3qiie"></shadow>
+      <block type="type_other" id="t#3[JnN4cCk!5u}1,l]/">
+        <field name="TYPE">Simulator</field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="0#b,sY?gjdA2ktzp5yD6">
+        <mutation colour="#995ba6"></mutation>
+        <field name="HUE">290</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="Fr~k4}sb+}3z%:`u4)G$" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">read_nitpic_exp</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="yWZcwksw(e{{El_baI3d">
+        <field name="ALIGN">RIGHT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="3t:X{/c|C;wkxH[VP/B?">
+            <field name="TEXT">NITPIC experiment file where</field>
+            <next>
+              <block type="field_input" id="1C|c(.[[7Uv24SBhq[2)">
+                <field name="TEXT">Ligand</field>
+                <field name="FIELDNAME">LIGAND_NAME</field>
+                <next>
+                  <block type="field_static" id="C||}DXJwcCF_$~1d{O2M">
+                    <field name="TEXT">was added to</field>
+                    <next>
+                      <block type="field_input" id="7Z#s6V@@2[-{?-u!bKhG">
+                        <field name="TEXT">Lattice</field>
+                        <field name="FIELDNAME">LATTICE_NAME</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_value" id="FBR6`9)f`GT^|Rl]vmE6">
+            <field name="INPUTNAME">file</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="_cG;uwc/~[b?t~fo(4PW"></shadow>
+              <block type="type_string" id="TA1,oH-8bY/Oobnp%?mB"></block>
+            </value>
+            <next>
+              <block type="input_dummy" id="6hNt7E50MA=wpyi4Y3=w">
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="]wD8T$y_c+1mkF{8-J}B">
+                    <field name="TEXT">Recalculate component concentrations</field>
+                    <next>
+                      <block type="field_checkbox" id="lJK@ufqsA-l::iiq}a+w">
+                        <field name="CHECKED">TRUE</field>
+                        <field name="FIELDNAME">recalc_concs</field>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="gLz8?t:}DtryG`G%b3o," deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="P`]`_tM.RdBc6pt:]yP!" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="cqGUD$BQN[Z2LO^YFMsB"></shadow>
+      <block type="type_other" id="OhSop.7r};4P=14`{2wa">
+        <field name="TYPE">Experiment</field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="4M,GogYXpsdGIgprDu|]">
+        <mutation colour="#a65b5b"></mutation>
+        <field name="HUE">0</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id=",kLl:L?(WaFu3gJq8Wau" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">change_component_name</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="zQ0?w-SbY=.a88{$#iS)">
+        <field name="INPUTNAME">experiment</field>
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="9!JE[D}C!#aG`[:O7Dzb">
+            <field name="TEXT">Change component name</field>
+            <next>
+              <block type="field_input" id="?LaRb(oZ,W4Z4C05hyJF">
+                <field name="TEXT">default</field>
+                <field name="FIELDNAME">old_name</field>
+                <next>
+                  <block type="field_static" id="n#Wu:t$r9+=gyZWg~:H#">
+                    <field name="TEXT">to</field>
+                    <next>
+                      <block type="field_input" id="Icz,Ncc^Cqdc5H#w?EMt">
+                        <field name="TEXT">default</field>
+                        <field name="FIELDNAME">new_name</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="e@sbL#+H9Z261]j~EH+M"></shadow>
+          <block type="type_other" id="kOc]q5c+o)kBPHI,Rn(z">
+            <field name="TYPE">Experiment</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="w`f;vf,Sx3Ax%oRS.`s@" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="{Q0qRSn6GsHK;]MXrO,b" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="I%wea0I83aoflKe6%vX="></shadow>
+      <block type="type_other" id="8#y@MS_MB5v8%xcmy?iU">
+        <field name="TYPE">Experiment</field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="?URZ7%*XuOHlgNl~~L8c">
+        <mutation colour="#5b68a6"></mutation>
+        <field name="HUE">230</field>
       </block>
     </value>
   </block></xml>

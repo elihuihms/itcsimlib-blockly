@@ -207,11 +207,12 @@ Code.attemptCodeGeneration = function(generator, prettyPrintType) {
     var code = generator.workspaceToCode(Code.workspace);
 
     content.textContent = code;
-    if (typeof PR.prettyPrintOne == 'function') {
+    /*if (typeof PR.prettyPrintOne == 'function') {
       code = content.textContent;
       code = PR.prettyPrintOne(code, prettyPrintType);
       content.innerHTML = code;
     }
+    */
   }
 };
 

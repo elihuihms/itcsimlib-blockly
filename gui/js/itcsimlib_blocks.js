@@ -24,7 +24,7 @@ Blockly.Blocks['make_simulator'] = {
 Blockly.Blocks['synthetic_experiment'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Synthetic experiment named")
+        .appendField("Simulated experiment named")
         .appendField(new Blockly.FieldTextInput("title"), "TITLE")
         .appendField(",");
     this.appendDummyInput()
@@ -54,7 +54,43 @@ Blockly.Blocks['synthetic_experiment'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Injections (List)");
     this.setOutput(true, "Experiment");
-    this.setColour(290);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['read_nitpic_exp'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("NITPIC experiment file where")
+        .appendField(new Blockly.FieldTextInput("Ligand"), "LIGAND_NAME")
+        .appendField("was added to")
+        .appendField(new Blockly.FieldTextInput("Lattice"), "LATTICE_NAME");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Recalculate component concentrations")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "recalc_concs");
+    this.setInputsInline(false);
+    this.setOutput(true, "Experiment");
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['change_component_name'] = {
+  init: function() {
+    this.appendValueInput("experiment")
+        .setCheck("Experiment")
+        .appendField("Change component name")
+        .appendField(new Blockly.FieldTextInput("default"), "old_name")
+        .appendField("to")
+        .appendField(new Blockly.FieldTextInput("default"), "new_name");
+    this.setOutput(true, "Experiment");
+    this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -65,7 +101,7 @@ Blockly.Blocks['simulator_experiments'] = {
     this.appendDummyInput()
         .appendField("Simulator experiments");
     this.setOutput(true, "Array");
-    this.setColour(120);
+    this.setColour(0);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -99,10 +135,10 @@ Blockly.Blocks['add_experiment'] = {
   init: function() {
     this.appendValueInput("EXPERIMENT")
         .setCheck("Experiment")
-        .appendField("Add to simulator");
+        .appendField("Add experiment to simulator");
     this.setPreviousStatement(true, "Simulator");
     this.setNextStatement(true, "Simulator");
-    this.setColour(120);
+    this.setColour(0);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -120,7 +156,7 @@ Blockly.Blocks['independent_modes_model'] = {
         .appendField("(s) bind to a")
         .appendField(new Blockly.FieldTextInput("Lattice"), "LATTICE_NAME");
     this.setOutput(true, "Model");
-    this.setColour(210);
+    this.setColour(160);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -148,7 +184,7 @@ Blockly.Blocks['set_model_parameter'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, "Simulator");
     this.setNextStatement(true, "Simulator");
-    this.setColour(210);
+    this.setColour(160);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -160,7 +196,7 @@ Blockly.Blocks['get_model_parameters'] = {
         .appendField(new Blockly.FieldDropdown([["dG","dG"], ["dH","dH"], ["dCp","dCp"]]), "TYPE")
         .appendField("model parameters");
     this.setOutput(true, "Array");
-    this.setColour(210);
+    this.setColour(160);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -189,7 +225,7 @@ Blockly.Blocks['setup_ising_model'] = {
         .appendField("Lattice behavior");
     this.setInputsInline(false);
     this.setOutput(true, "Model");
-    this.setColour(210);
+    this.setColour(230);
  this.setTooltip("Set up Model");
  this.setHelpUrl("");
   }
@@ -205,7 +241,7 @@ Blockly.Blocks['site_is_occupied'] = {
         .appendField("occupied");
     this.setInputsInline(true);
     this.setOutput(true, "Boolean");
-    this.setColour(330);
+    this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -217,7 +253,7 @@ Blockly.Blocks['configuration_sites'] = {
         .appendField(new Blockly.FieldDropdown([["all","ALL"], ["occupied","OCCUPIED"], ["empty","EMPTY"]]), "TYPE")
         .appendField("sites in the configuration");
     this.setOutput(true, "Array");
-    this.setColour(330);
+    this.setColour(230);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -254,7 +290,7 @@ Blockly.Blocks['add_dg_model_value'] = {
         .appendField("dCp");
     this.setPreviousStatement(true, "Configuration");
     this.setNextStatement(true, "Configuration");
-    this.setColour(330);
+    this.setColour(210);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -272,7 +308,7 @@ Blockly.Blocks['add_dh_model_value'] = {
         .appendField("dCp");
     this.setPreviousStatement(true, "Configuration");
     this.setNextStatement(true, "Configuration");
-    this.setColour(330);
+    this.setColour(210);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -286,6 +322,59 @@ Blockly.Blocks['run_simulator'] = {
     this.setPreviousStatement(true, "Simulator");
     this.setNextStatement(true, "Simulator");
     this.setColour(120);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['get_partition_function'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Print partition function");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Convert dGs to K")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "substitute_Ks");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Aggressively simplify expression")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "full_simplify");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Export as LaTeX")
+        .appendField(new Blockly.FieldCheckbox("FALSE"), "as_latex");
+    this.appendValueInput("file")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("File name:");
+    this.setPreviousStatement(true, "Simulator");
+    this.setNextStatement(true, "Simulator");
+    this.setColour(290);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['draw_lattices'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw lattices");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Scale:")
+        .appendField(new Blockly.FieldNumber(1, 0, Infinity, 1), "size");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("dG tolerance:")
+        .appendField(new Blockly.FieldNumber(6, 1), "dG_tolerance");
+    this.appendValueInput("file")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("File name:");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, "Simulator");
+    this.setNextStatement(true, "Simulator");
+    this.setColour(290);
  this.setTooltip("");
  this.setHelpUrl("");
   }

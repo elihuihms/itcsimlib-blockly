@@ -1,21 +1,25 @@
 <xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none">
-  <variables>
-    <variable type="" id="`%wW,.FyLK-X[2#S)j:[">i</variable>
-  </variables>
-  <block type="controls_forEach" id="Z!9,UWhqPNN8cuo%P3=z" x="38" y="-387">
-    <field name="VAR" id="`%wW,.FyLK-X[2#S)j:[" variabletype="">i</field>
-    <value name="LIST">
-      <block type="simulator_experiments" id="ddXvNEeE7^5SMK@qzKqW"></block>
-    </value>
-    <statement name="DO">
-      <block type="plot_experiment_data" id="Khxs_ZTx{`+Yb#@[=7%:">
-        <field name="EXTENSION">png</field>
-        <value name="NAME">
-          <block type="variables_get" id="@q;^?%4WDU8y+V#P*u)0">
-            <field name="VAR" id="`%wW,.FyLK-X[2#S)j:[" variabletype="">i</field>
-          </block>
-        </value>
+  <block type="make_simulator" id="Wk.+lrB(3~GPJFR:WSx^" x="-87" y="12">
+    <field name="T0">273.15</field>
+    <field name="UNITS">kcal</field>
+    <value name="MODEL">
+      <block type="independent_modes_model" id="YG?]78Yfb,p2KPs_YGS)">
+        <field name="MODES">2</field>
+        <field name="LIGAND_NAME">Ligand</field>
+        <field name="LATTICE_NAME">Lattice</field>
       </block>
-    </statement>
+    </value>
+    <next>
+      <block type="get_partition_function" id="|f][Vuv8FJuB~n3}9;MV">
+        <field name="substitute_Ks">TRUE</field>
+        <field name="full_simplify">TRUE</field>
+        <next>
+          <block type="draw_lattices" id="dp+:/d]A[SBi9n1g;cA;">
+            <field name="size">1</field>
+            <field name="dG_tolerance">6</field>
+          </block>
+        </next>
+      </block>
+    </next>
   </block>
 </xml>
